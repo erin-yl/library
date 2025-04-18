@@ -1,17 +1,38 @@
+html {
+  justify-content: center;
+  --font-primary: "Poppins", serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  line-height: calc(1em + 0.6rem);
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  font-family: var(--font-primary);
+  margin: 4vw auto;
+  width: 92vw;
+  max-width: 1280px;
+  gap: 24px;
 }
 
-.poppins {
-  font-family: "Poppins", serif;
+h1 {
+  font-family: var(--font-primary);
   font-weight: 400;
-  font-style: normal;
+  font-size: 32px;
+  color: #242325;
 }
 
 .button {
+  font-family: var(--font-primary);
+  font-weight: 300;
   background-color: #fff1e6;
   color: #242325;
   border: none;
@@ -26,7 +47,17 @@ body {
 }
 
 #container {
- display: flex;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 300px;
+}
+
+.book {
+  background-color: #fff1e6;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  width: 100px;
+  text-align: center;
 }

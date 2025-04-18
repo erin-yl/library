@@ -8,21 +8,24 @@ function Book(title, author, pages, read) {
     throw Error("You must use the 'new' operator to call the constructor");
   }
 
-  this.id = crypto.randomUUID();
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.id = crypto.randomUUID();
 }
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
+
+  for (el in myLibrary) {
+    const bookDiv = document.createElement("div");
+    bookDiv.classList.add("book");
+    container.appendChild(bookDiv);
+  }
 }
 
-function displayBook() {
-  for (el in myLibrary) {
-    console.log(el);
-  }
-  container.appendChild(myLibrary[el]);
-}
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
+addBookToLibrary("Harry Potter", "J.K. Rowling", 309, false);
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
