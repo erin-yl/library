@@ -1,5 +1,5 @@
 const container = document.querySelector("#container");
-const button = document.querySelector(".button");
+const button = document.querySelector("button");
 
 const myLibrary = [];
 
@@ -13,19 +13,18 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
   this.id = crypto.randomUUID();
-}
-
-function addBookToLibrary(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-
-  for (el in myLibrary) {
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-    container.appendChild(bookDiv);
+  this.displayInfo = function () {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
   }
 }
 
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
-addBookToLibrary("Harry Potter", "J.K. Rowling", 309, false);
-addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+function addBookToLibrary(title, author, pages, read) {
+  const myLibrary = new Book(title, author, pages, read);
+  const bookDiv = document.createElement("div");
+  bookDiv.classList.add("book");
+  container.appendChild(bookDiv);
+  bookDiv.textContent = myLibrary.displayInfo();
+}
+
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, "read");
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, "not read");
