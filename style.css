@@ -30,6 +30,13 @@ h1 {
   color: #242325;
 }
 
+h2 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 24px;
+  color: #242325;
+}
+
 .button {
   font-family: var(--font-primary);
   font-weight: 300;

@@ -12,7 +12,10 @@
 <body>
   <h1>Library</h1>
   <dialog id="bookDialog">
-    <form>
+    <form name="bookForm">
+      <h2>Book Information</h2>
+      <p id="errorMsg"></p>
+
       <label for="author">Author:</label>
       <input type="text" id="author" name="author" required>
 
@@ -42,7 +45,6 @@
   <p>
     <button id="showDialog">Add new book</button>
   </p>
-  <output></output>
 
   <div id="container"></div>
   <script src="script.js"></script>

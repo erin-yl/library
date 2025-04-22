@@ -1,10 +1,9 @@
 const container = document.querySelector("#container");
 const form = document.querySelector("form");
-const showBtn = document.getElementById("showDialog");
+const showDialog = document.getElementById("showDialog");
 const bookDialog = document.getElementById("bookDialog");
 const confirmBtn = bookDialog.querySelector("#confirmBtn");
 const cancelBtn = bookDialog.querySelector("#cancelBtn");
-
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -30,7 +29,7 @@ function addBookToLibrary(title, author, pages, readStatus) {
   bookDiv.textContent = myLibrary.displayInfo();
 }
 
-showBtn.addEventListener("click", () => {
+showDialog.addEventListener("click", () => {
   bookDialog.showModal();
 });
 
@@ -40,10 +39,18 @@ cancelBtn.addEventListener("click", (event) => {
 });
 
 confirmBtn.addEventListener("click", (event) => {
-  event.preventDefault();
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData);
-  addBookToLibrary(formValues.title, formValues.author, formValues.pages, formValues.readStatus);
+  if (formValues.title == "" || formValues.author == "" || formValues.pages == "" || formValues.readStatus == undefined) {
+    const errorMsg = document.getElementById("errorMsg");
+    errorMsg.innerText = "Please fill in all fields";
+  } else {
+    addBookToLibrary(formValues.title, formValues.author, formValues.pages, formValues.readStatus);
+    bookDialog.close();
+    form.reset();
+    errorMsg.innerText = "";
+  }
+  event.preventDefault();
 });
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, "read");
