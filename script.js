@@ -1,5 +1,29 @@
 const container = document.querySelector("#container");
 const button = document.querySelector("button");
+const showBtn = document.getElementById("show-dialog");
+const bookDialog = document.getElementById("book-dialog");
+const outputBox = document.querySelector("output");
+const selectEl = document.querySelector('input[name="read-status"]:checked');
+const confirmBtn = bookDialog.querySelector("#confirm-btn");
+
+// "Show the dialog" button opens the <dialog> modally
+showBtn.addEventListener("click", () => {
+  bookDialog.showModal();
+});
+
+// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
+bookDialog.addEventListener("close", (e) => {
+  outputBox.value =
+    bookDialog.returnValue === "default"
+      ? "No return value."
+      : `ReturnValue: ${bookDialog.returnValue}.`; // Have to check for "default" rather than empty string
+});
+
+// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method, which triggers the "close" event.
+confirmBtn.addEventListener("click", (event) => {
+  event.preventDefault(); // We don't want to submit this fake form
+  bookDialog.close(selectEl.value); // Have to send the select box value here.
+});
 
 const myLibrary = [];
 
