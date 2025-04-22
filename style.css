@@ -37,7 +37,7 @@ h2 {
   color: #242325;
 }
 
-.button {
+button {
   font-family: var(--font-primary);
   font-weight: 300;
   background-color: #fff1e6;
@@ -48,7 +48,7 @@ h2 {
   margin: 24px;
 }
 
-.button:hover {
+button:hover {
   background-color: #ffe8d6;
   transition-duration: 0.2s;
 }
@@ -60,11 +60,16 @@ h2 {
   width: 300px;
 }
 
-.book {
+.card {
   background-color: #fff1e6;
   border-radius: 8px;
   padding: 16px;
   margin: 8px;
   width: 300px;
   text-align: center;
+}
+
+.remove {
+  display: block;
+  text-decoration: underline;
 }

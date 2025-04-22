@@ -1,7 +1,7 @@
 const container = document.querySelector("#container");
 const form = document.querySelector("form");
-const showDialog = document.getElementById("showDialog");
-const bookDialog = document.getElementById("bookDialog");
+const showDialog = document.querySelector("#showDialog");
+const bookDialog = document.querySelector("#bookDialog");
 const confirmBtn = bookDialog.querySelector("#confirmBtn");
 const cancelBtn = bookDialog.querySelector("#cancelBtn");
 const myLibrary = [];
@@ -16,7 +16,7 @@ function Book(title, author, pages, readStatus) {
   this.pages = pages;
   this.readStatus = readStatus;
   this.id = crypto.randomUUID();
-  this.displayInfo = function () {
+  this.showBookInfo = function () {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus}`;
   }
 }
@@ -24,9 +24,19 @@ function Book(title, author, pages, readStatus) {
 function addBookToLibrary(title, author, pages, readStatus) {
   const myLibrary = new Book(title, author, pages, readStatus);
   const bookDiv = document.createElement("div");
-  bookDiv.classList.add("book");
+  const removeBtn = document.createElement("span");
+
+  bookDiv.textContent = myLibrary.showBookInfo();
+  bookDiv.classList.add("card");
+  removeBtn.textContent = "Remove";
+  removeBtn.classList.add("remove");
+
+  bookDiv.appendChild(removeBtn);
   container.appendChild(bookDiv);
-  bookDiv.textContent = myLibrary.displayInfo();
+
+  removeBtn.addEventListener("click", () => {
+    container.removeChild(bookDiv);
+  });
 }
 
 showDialog.addEventListener("click", () => {
@@ -53,5 +63,6 @@ confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
 });
 
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, "read");
-addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, "not read");
+addBookToLibrary("Quiet", " Susan Cain", 352, "read");
+addBookToLibrary("Crying in H Mart", "Michelle Zauner", 256, "read");
+addBookToLibrary("The Midnight Library", "Matt Haig", 304, "read");
