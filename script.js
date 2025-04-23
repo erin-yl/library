@@ -17,21 +17,29 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
   this.id = crypto.randomUUID();
   this.showBookInfo = function () {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus}`;
+    return `Title: ${this.title}\nAuthor: ${this.author}\nPages: ${this.pages}\nStatus: ${this.readStatus}`;
   }
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
   const myLibrary = new Book(title, author, pages, readStatus);
   const bookDiv = document.createElement("div");
+  const bookTitle = document.createElement("p");
+  const bookAuthor = document.createElement("p");
+  const bookPages = document.createElement("p");
+  const bookStatus = document.createElement("p");
   const removeBtn = document.createElement("span");
 
-  bookDiv.textContent = myLibrary.showBookInfo();
+  bookTitle.textContent = `Title: ${myLibrary.title}`;
+  bookAuthor.textContent = `Author: ${myLibrary.author}`;
+  bookPages.textContent = `Pages: ${myLibrary.pages}`;
+  bookStatus.textContent = `Status: ${myLibrary.readStatus}`;
+
   bookDiv.classList.add("card");
   removeBtn.textContent = "Remove";
   removeBtn.classList.add("remove");
 
-  bookDiv.appendChild(removeBtn);
+  bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, removeBtn);
   container.appendChild(bookDiv);
 
   removeBtn.addEventListener("click", () => {
