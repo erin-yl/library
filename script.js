@@ -25,6 +25,7 @@ function addBookToLibrary(title, author, pages, readStatus) {
   const bookAuthor = document.createElement("p");
   const bookPages = document.createElement("p");
   const bookStatus = document.createElement("p");
+  const divider = document.createElement("hr");
   const changeBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
 
@@ -35,12 +36,12 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
   bookDiv.classList.add("card");
   changeBtn.textContent = "Change read status";
-  changeBtn.classList = "primaryBtn";
+  changeBtn.classList = "secondaryBtn";
   removeBtn.textContent = "Remove";
   removeBtn.classList.add("secondaryBtn");
 
-  bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, changeBtn, removeBtn);
-  container.appendChild(bookDiv);
+  bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, divider, changeBtn, removeBtn);
+  container.prepend(bookDiv);
 
   changeBtn.addEventListener("click", () => {
     if (bookStatus.textContent == "Status: Read") {
@@ -70,7 +71,7 @@ confirmBtn.addEventListener("click", (event) => {
   const errorMsg = bookDialog.querySelector("#errorMsg");
   
   if (formValues.title == "" || formValues.author == "" || formValues.pages == "") {
-    errorMsg.innerText = "Please fill in the required fields";
+    errorMsg.textContent = "Please fill in the required fields";
   } else {
     const checkbox = bookDialog.querySelector("#read");
     const hiddenInput = bookDialog.querySelector("#notRead");
@@ -78,7 +79,7 @@ confirmBtn.addEventListener("click", (event) => {
     addBookToLibrary(formValues.title, formValues.author, formValues.pages, hiddenInput.value);
     bookDialog.close();
     form.reset();
-    errorMsg.innerText = "";
+    errorMsg.textContent = "";
   }
   event.preventDefault();
 });
