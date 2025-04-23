@@ -68,11 +68,12 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 300px;
+  width: 1000px;
 }
 
 .card {
-  background-color: #fff1e6;
+  border: solid 1px #242325;
+  background-color: transparent;
   border-radius: 8px;
   padding: 16px;
   margin: 8px;
