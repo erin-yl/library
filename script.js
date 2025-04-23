@@ -18,6 +18,10 @@ function Book(title, author, pages, readStatus) {
   this.id = crypto.randomUUID();
 }
 
+Book.prototype.changeReadStatus = function() {
+  console.log(`Hello, I'm ${this.name}!`);
+};
+
 function addBookToLibrary(title, author, pages, readStatus) {
   const myLibrary = new Book(title, author, pages, readStatus);
   const bookDiv = document.createElement("div");
@@ -25,7 +29,8 @@ function addBookToLibrary(title, author, pages, readStatus) {
   const bookAuthor = document.createElement("p");
   const bookPages = document.createElement("p");
   const bookStatus = document.createElement("p");
-  const removeBtn = document.createElement("span");
+  const changeBtn = document.createElement("button");
+  const removeBtn = document.createElement("button");
 
   bookTitle.textContent = `Title: ${myLibrary.title}`;
   bookAuthor.textContent = `Author: ${myLibrary.author}`;
@@ -33,8 +38,10 @@ function addBookToLibrary(title, author, pages, readStatus) {
   bookStatus.textContent = `Status: ${myLibrary.readStatus}`;
 
   bookDiv.classList.add("card");
+  changeBtn.textContent = "Change read status";
+  changeBtn.classList = "primaryBtn";
   removeBtn.textContent = "Remove";
-  removeBtn.classList.add("remove");
+  removeBtn.classList.add("secondaryBtn");
 
   bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, removeBtn);
   container.appendChild(bookDiv);
