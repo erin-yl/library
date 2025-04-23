@@ -53,7 +53,7 @@ button:hover {
   transition-duration: 0.2s;
 }
 
-#container {
+.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

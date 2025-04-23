@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Library</title>
+  <title>Library Collection</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Library</h1>
+  <h1>Library collection</h1>
   <dialog id="bookDialog">
     <form name="bookForm">
-      <h2>Book Information</h2>
+      <h2>Book information</h2>
       <p id="errorMsg"></p>
 
       <label for="title">Title:</label>
@@ -25,28 +25,23 @@
       <label for="pages">Pages:</label>
       <input type="number" id="pages" name="pages" required>
       
-      <fieldset>
-        <legend>Have you read this book?</legend>
-        <div>  
-          <input type="radio" id="read" name="readStatus" value="read" required>
-          <label for="read">Read</label>
-
-          <input type="radio" id="notRead" name="readStatus" value="not read">
-          <label for="notRead">Not read</label>
-        </div>
-      </fieldset>
+      <div>  
+        <input type="checkbox" id="read" name="readStatus" value="Read">
+        <input type="hidden" id="notRead" name="readStatus" value="Not read">
+        <label for="read">I have read this book.</label>
+      </div>
       
       <div>
         <button id="cancelBtn" value="cancel">Cancel</button>
-        <button id="confirmBtn" value="confirm">Confirm</button>
+        <button id="confirmBtn" value="confirm">Add book</button>
       </div>
     </form>
   </dialog>
   <p>
-    <button id="showDialog">Add new book</button>
+    <button id="showDialog">Add book</button>
   </p>
 
-  <div id="container"></div>
+  <div class="container"></div>
   <script src="script.js"></script>
 </body>
 </html>

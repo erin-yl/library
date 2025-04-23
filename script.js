@@ -1,4 +1,4 @@
-const container = document.querySelector("#container");
+const container = document.querySelector(".container");
 const form = document.querySelector("form");
 const showDialog = document.querySelector("#showDialog");
 const bookDialog = document.querySelector("#bookDialog");
@@ -16,9 +16,6 @@ function Book(title, author, pages, readStatus) {
   this.pages = pages;
   this.readStatus = readStatus;
   this.id = crypto.randomUUID();
-  this.showBookInfo = function () {
-    return `Title: ${this.title}\nAuthor: ${this.author}\nPages: ${this.pages}\nStatus: ${this.readStatus}`;
-  }
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
@@ -59,11 +56,15 @@ cancelBtn.addEventListener("click", (event) => {
 confirmBtn.addEventListener("click", (event) => {
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData);
-  if (formValues.title == "" || formValues.author == "" || formValues.pages == "" || formValues.readStatus == undefined) {
-    const errorMsg = document.getElementById("errorMsg");
-    errorMsg.innerText = "Please fill in all fields";
+  const errorMsg = bookDialog.querySelector("#errorMsg");
+  
+  if (formValues.title == "" || formValues.author == "" || formValues.pages == "") {
+    errorMsg.innerText = "Please fill in the required fields";
   } else {
-    addBookToLibrary(formValues.title, formValues.author, formValues.pages, formValues.readStatus);
+    const checkbox = bookDialog.querySelector("#read");
+    const hiddenInput = bookDialog.querySelector("#notRead");
+    hiddenInput.value = checkbox.checked ? "Read" : "Not read";
+    addBookToLibrary(formValues.title, formValues.author, formValues.pages, hiddenInput.value);
     bookDialog.close();
     form.reset();
     errorMsg.innerText = "";
@@ -71,6 +72,6 @@ confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
 });
 
-addBookToLibrary("Quiet", " Susan Cain", 352, "read");
-addBookToLibrary("Crying in H Mart", "Michelle Zauner", 256, "read");
-addBookToLibrary("The Midnight Library", "Matt Haig", 304, "read");
+addBookToLibrary("Quiet", " Susan Cain", 352, "Read");
+addBookToLibrary("Crying in H Mart", "Michelle Zauner", 256, "Read");
+addBookToLibrary("The Midnight Library", "Matt Haig", 304, "Read");
