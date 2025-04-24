@@ -27,6 +27,7 @@ h1 {
 h2 {
   font-weight: 400;
   font-size: 24px;
+  margin-bottom: 24px;
 }
 
 p {
@@ -57,12 +58,52 @@ hr {
   margin: 16px 0;
 }
 
+#bookDialog {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 8px;
+  background-color: #fafafa;
+  padding: 36px;
+  width: 400px;
+}
+
+form input[type=text], form input[type=number] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px 0;
+  border: solid 1px #d9d4c7;
+  border-radius: 4px;
+  background: transparent;
+}
+
+form input[type=text]:focus, form input[type=number]:focus {
+  border: solid 1px #00627a;
+  outline: none;
+}
+
+form input[type=checkbox] {
+  margin: 8px 4px 8px 0;
+  vertical-align: -1px;
+  accent-color: #0085a3;
+}
+
+.dialogBtn {
+  float: right;
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
 .primaryBtn {
   font-family: "Poppins", serif;
   color: #fafafa;
   font-weight: 300;
   background-color: #00627a;
-  border: none;
+  border: solid 1px #00627a;
+  border-radius: 4px;
   font-size: 16px;
   padding: 12px 16px;
 }
@@ -77,6 +118,7 @@ hr {
   color: #00627a;
   font-weight: 300;
   border: solid 1px #00627a;
+  border-radius: 4px;
   background-color: transparent;
   font-size: 16px;
   padding: 12px 16px;

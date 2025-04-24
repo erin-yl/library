@@ -15,33 +15,39 @@
     <form name="bookForm">
       <h2>Book information</h2>
       <p id="errorMsg"></p>
-
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required>
-
-      <label for="author">Author:</label>
-      <input type="text" id="author" name="author" required>
-
-      <label for="pages">Pages:</label>
-      <input type="number" id="pages" name="pages" required>
       
-      <div>  
+      <div>
+        <label for="title">Title*</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <div>
+        <label for="author">Author*</label>
+        <input type="text" id="author" name="author" required>
+      </div>
+
+      <div>
+        <label for="pages">Pages*</label>
+        <input type="number" id="pages" name="pages" required>
+      </div>
+      
+      <div>
         <input class="read" type="checkbox" id="read" name="readStatus" value="Read">
         <input type="hidden" id="notRead" name="readStatus" value="Not read">
         <label for="read">I have read this book.</label>
       </div>
-      
-      <div>
+
+      <div class="dialogBtn">
         <button class="secondaryBtn" id="cancelBtn" value="cancel">Cancel</button>
-        <button class="primaryBtn" id="confirmBtn" value="confirm">Add book</button>
+        <button class="primaryBtn" id="confirmBtn" value="confirm">Confirm</button>
       </div>
     </form>
   </dialog>
-  <p>
-    <button class="primaryBtn" id="showDialog">Add book</button>
-  </p>
+  
+  <button class="primaryBtn" id="showDialog">Add book</button>
 
   <div class="container"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
