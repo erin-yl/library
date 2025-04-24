@@ -54,7 +54,10 @@ p {
 }
 
 hr {
-  border-top: 1px solid #f2eeea;
+  height: 1px;
+  border-width: 0;
+  color: #d9d4c7;
+  background-color: #d9d4c7;
   margin: 16px 0;
 }
 
@@ -73,7 +76,7 @@ hr {
 form input[type=text], form input[type=number] {
   width: 100%;
   padding: 12px;
-  margin: 8px 0 16px 0;
+  margin-top: 4px;
   border: solid 1px #d9d4c7;
   border-radius: 4px;
   background: transparent;
@@ -87,7 +90,14 @@ form input[type=text]:focus, form input[type=number]:focus {
 form input[type=checkbox] {
   margin: 8px 4px 8px 0;
   vertical-align: -1px;
-  accent-color: #0085a3;
+  accent-color: #00627a;
+}
+
+.helpText {
+  display: inline-block;
+  font-size: 12px;
+  color: #56626a;
+  margin-bottom: 16px;
 }
 
 .dialogBtn {
