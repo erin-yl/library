@@ -73,7 +73,7 @@ confirmBtn.addEventListener("click", (event) => {
   
   if (formValues.title == "" || formValues.author == "" || formValues.pages == "") {
     errorDiv.style.display = "inline-block";
-    errorMsg.textContent = "Please fill out the required fields.";
+    errorMsg.textContent = "Please enter the book's title, author, and number of pages.";
   } else {
     const checkbox = bookDialog.querySelector("#read");
     const hiddenInput = bookDialog.querySelector("#notRead");
