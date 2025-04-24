@@ -68,10 +68,12 @@ cancelBtn.addEventListener("click", (event) => {
 confirmBtn.addEventListener("click", (event) => {
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData);
-  const errorMsg = bookDialog.querySelector("#errorMsg");
+  const error = bookDialog.querySelector(".error");
+  const errorMsg = bookDialog.querySelector(".errorMsg");
   
   if (formValues.title == "" || formValues.author == "" || formValues.pages == "") {
-    errorMsg.textContent = "Please fill out the required fields";
+    error.style.display = "inline-block";
+    errorMsg.textContent = "Please fill out the required fields.";
   } else {
     const checkbox = bookDialog.querySelector("#read");
     const hiddenInput = bookDialog.querySelector("#notRead");

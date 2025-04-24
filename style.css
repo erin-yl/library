@@ -97,6 +97,19 @@ form input[type=checkbox] {
   accent-color: #00627a;
 }
 
+.error {
+  display: none;
+  background-color: #fce4e4;
+  border: 1px solid #fcc2c3;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.errorMsg {
+  font-size: 12px;
+  color: #cc0033;;
+}
+
 .helpText {
   display: inline-block;
   font-size: 12px;
