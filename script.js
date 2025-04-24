@@ -71,7 +71,7 @@ confirmBtn.addEventListener("click", (event) => {
   const errorMsg = bookDialog.querySelector("#errorMsg");
   
   if (formValues.title == "" || formValues.author == "" || formValues.pages == "") {
-    errorMsg.textContent = "Please fill in the required fields";
+    errorMsg.textContent = "Please fill out the required fields";
   } else {
     const checkbox = bookDialog.querySelector("#read");
     const hiddenInput = bookDialog.querySelector("#notRead");
