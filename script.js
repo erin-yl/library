@@ -36,7 +36,7 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
   bookDiv.classList.add("card");
   changeBtn.textContent = "Change read status";
-  changeBtn.classList = "secondaryBtn";
+  changeBtn.classList.add("secondaryBtn");
   removeBtn.textContent = "Remove book";
   removeBtn.classList.add("secondaryBtn");
 
