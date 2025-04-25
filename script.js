@@ -7,10 +7,6 @@ const cancelBtn = bookDialog.querySelector("#cancelBtn");
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
-  }
-
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -19,7 +15,14 @@ function Book(title, author, pages, readStatus) {
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
-  const myLibrary = new Book(title, author, pages, readStatus);
+  const newBook = new Book(title, author, pages, readStatus);
+  myLibrary.push(newBook);
+
+  const bookDiv = createBookCard(newBook);
+  container.prepend(bookDiv);
+}
+
+function createBookCard(book) {
   const bookDiv = document.createElement("div");
   const bookTitle = document.createElement("p");
   const bookAuthor = document.createElement("p");
@@ -29,31 +32,65 @@ function addBookToLibrary(title, author, pages, readStatus) {
   const changeBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
 
-  bookTitle.textContent = `Title: ${myLibrary.title}`;
-  bookAuthor.textContent = `Author: ${myLibrary.author}`;
-  bookPages.textContent = `Pages: ${myLibrary.pages}`;
-  bookStatus.textContent = `Status: ${myLibrary.readStatus}`;
+  bookTitle.textContent = `Title: ${book.title}`;
+  bookAuthor.textContent = `Author: ${book.author}`;
+  bookPages.textContent = `Pages: ${book.pages}`;
+  bookStatus.textContent = `Status: ${book.readStatus}`;
 
   bookDiv.classList.add("card");
+  bookDiv.dataset.id = book.id;
+  
   changeBtn.textContent = "Change read status";
   changeBtn.classList.add("secondaryBtn");
+
   removeBtn.textContent = "Remove book";
   removeBtn.classList.add("secondaryBtn");
 
   bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, divider, changeBtn, removeBtn);
-  container.prepend(bookDiv);
 
   changeBtn.addEventListener("click", () => {
-    if (bookStatus.textContent == "Status: Read") {
-      bookStatus.textContent = "Status: Not read";
-    } else {
-      bookStatus.textContent = "Status: Read";
+    // Update both the display and the data model
+    const bookIndex = myLibrary.findIndex(b => b.id === book.id);
+    if (bookIndex !== -1) {
+      myLibrary[bookIndex].readStatus = myLibrary[bookIndex].readStatus === "Read" ? "Not read" : "Read";
+      bookStatus.textContent = `Status: ${myLibrary[bookIndex].readStatus}`;
     }
   });
 
   removeBtn.addEventListener("click", () => {
+    // Remove from both DOM and array
     container.removeChild(bookDiv);
+    const bookIndex = myLibrary.findIndex(b => b.id === book.id);
+    if (bookIndex !== -1) {
+      myLibrary.splice(bookIndex, 1);
+    }
   });
+  
+  return bookDiv;
+}
+
+function validateForm() {
+  const title = form.elements.title.value.trim();
+  const author = form.elements.author.value.trim();
+  const pages = form.elements.pages.value;
+  const errorDiv = bookDialog.querySelector(".errorDiv");
+  const errorMsg = bookDialog.querySelector(".errorMsg");
+  
+  if (!title || !author || !pages) {
+    errorDiv.style.display = "inline-block";
+    errorMsg.textContent = "Please enter the book's title, author, and number of pages.";
+    return false;
+  }
+
+  if (parseInt(pages) <= 0) {
+    errorDiv.style.display = "inline-block";
+    errorMsg.textContent = "Please enter a positive number for pages.";
+    return false;
+  }
+  
+  errorDiv.style.display = "none";
+  errorMsg.textContent = "";
+  return true;
 }
 
 showDialog.addEventListener("click", () => {
@@ -61,31 +98,29 @@ showDialog.addEventListener("click", () => {
 });
 
 cancelBtn.addEventListener("click", (event) => {
+  const errorDiv = bookDialog.querySelector(".errorDiv");
+
   event.preventDefault();
   bookDialog.close();
+  form.reset();
+  errorDiv.style.display = "none";
 });
 
 confirmBtn.addEventListener("click", (event) => {
-  const formData = new FormData(form);
-  const formValues = Object.fromEntries(formData);
-  const errorDiv = bookDialog.querySelector(".errorDiv");
-  const errorMsg = bookDialog.querySelector(".errorMsg");
+  event.preventDefault();
   
-  if (formValues.title == "" || formValues.author == "" || formValues.pages == "") {
-    errorDiv.style.display = "inline-block";
-    errorMsg.textContent = "Please enter the book's title, author, and number of pages.";
-  } else {
-    const checkbox = bookDialog.querySelector("#read");
-    const hiddenInput = bookDialog.querySelector("#notRead");
-    hiddenInput.value = checkbox.checked ? "Read" : "Not read";
-    addBookToLibrary(formValues.title, formValues.author, formValues.pages, hiddenInput.value);
+  if (validateForm()) {
+    const formData = new FormData(form);
+    const formValues = Object.fromEntries(formData);
+    const readStatus = form.elements.read.checked ? "Read" : "Not read";
+    
+    addBookToLibrary(formValues.title, formValues.author, formValues.pages, readStatus);
     bookDialog.close();
     form.reset();
-    errorMsg.textContent = "";
   }
-  event.preventDefault();
 });
 
+// Initialize with sample books
 addBookToLibrary("Quiet", " Susan Cain", 352, "Read");
 addBookToLibrary("Crying in H Mart", "Michelle Zauner", 256, "Read");
 addBookToLibrary("The Midnight Library", "Matt Haig", 304, "Read");
