@@ -1,9 +1,9 @@
 const container = document.querySelector(".container");
 const form = document.querySelector("form");
 const showDialog = document.querySelector("#showDialog");
-const bookDialog = document.querySelector("#bookDialog");
-const confirmBtn = bookDialog.querySelector("#confirmBtn");
-const cancelBtn = bookDialog.querySelector("#cancelBtn");
+const libraryDialog = document.querySelector("#libraryDialog");
+const confirmBtn = libraryDialog.querySelector(".confirm");
+const cancelBtn = libraryDialog.querySelector(".cancel");
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -13,6 +13,11 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
   this.id = crypto.randomUUID();
 }
+
+Book.prototype.toggleReadStatus = function() {
+  this.readStatus = this.readStatus === "Read" ? "Not read" : "Read";
+  return this.readStatus;
+};
 
 function addBookToLibrary(title, author, pages, readStatus) {
   const newBook = new Book(title, author, pages, readStatus);
@@ -24,36 +29,27 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
 function createBookCard(book) {
   const bookDiv = document.createElement("div");
-  const bookTitle = document.createElement("p");
-  const bookAuthor = document.createElement("p");
-  const bookPages = document.createElement("p");
-  const bookStatus = document.createElement("p");
-  const divider = document.createElement("hr");
-  const changeBtn = document.createElement("button");
-  const removeBtn = document.createElement("button");
-
-  bookTitle.textContent = `Title: ${book.title}`;
-  bookAuthor.textContent = `Author: ${book.author}`;
-  bookPages.textContent = `Pages: ${book.pages}`;
-  bookStatus.textContent = `Status: ${book.readStatus}`;
-
   bookDiv.classList.add("card");
   bookDiv.dataset.id = book.id;
+
+  bookDiv.innerHTML = `
+    <p>Title: ${book.title}</p>
+    <p>Author: ${book.author}</p>
+    <p>Pages: ${book.pages}</p>
+    <p class="status">Status: ${book.readStatus}</p>
+    <hr>
+    <button class="change secondaryBtn">Change read status</button>
+    <button class="remove secondaryBtn">Remove book</button>
+  `;
   
-  changeBtn.textContent = "Change read status";
-  changeBtn.classList.add("secondaryBtn");
-
-  removeBtn.textContent = "Remove book";
-  removeBtn.classList.add("secondaryBtn");
-
-  bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, divider, changeBtn, removeBtn);
+  const changeBtn = bookDiv.querySelector('.change');
+  const removeBtn = bookDiv.querySelector('.remove');
 
   changeBtn.addEventListener("click", () => {
-    // Update the DOM and myLibrary array
     const bookIndex = myLibrary.findIndex(b => b.id === book.id);
     if (bookIndex !== -1) {
-      myLibrary[bookIndex].readStatus = myLibrary[bookIndex].readStatus === "Read" ? "Not read" : "Read";
-      bookStatus.textContent = `Status: ${myLibrary[bookIndex].readStatus}`;
+      const newStatus = myLibrary[bookIndex].toggleReadStatus();
+      bookDiv.querySelector('.status').textContent = `Status: ${newStatus}`;
     }
   });
 
@@ -73,8 +69,8 @@ function validateForm() {
   const title = form.elements.title.value.trim();
   const author = form.elements.author.value.trim();
   const pages = form.elements.pages.value;
-  const errorDiv = bookDialog.querySelector(".errorDiv");
-  const errorMsg = bookDialog.querySelector(".errorMsg");
+  const errorDiv = libraryDialog.querySelector(".errorDiv");
+  const errorMsg = libraryDialog.querySelector(".errorMsg");
   
   if (!title || !author || !pages) {
     errorDiv.style.display = "inline-block";
@@ -94,14 +90,14 @@ function validateForm() {
 }
 
 showDialog.addEventListener("click", () => {
-  bookDialog.showModal();
+  libraryDialog.showModal();
 });
 
 cancelBtn.addEventListener("click", (event) => {
-  const errorDiv = bookDialog.querySelector(".errorDiv");
+  const errorDiv = libraryDialog.querySelector(".errorDiv");
 
   event.preventDefault();
-  bookDialog.close();
+  libraryDialog.close();
   form.reset();
   errorDiv.style.display = "none";
 });
@@ -115,7 +111,7 @@ confirmBtn.addEventListener("click", (event) => {
     const readStatus = form.elements.read.checked ? "Read" : "Not read";
     
     addBookToLibrary(formValues.title, formValues.author, formValues.pages, readStatus);
-    bookDialog.close();
+    libraryDialog.close();
     form.reset();
   }
 });

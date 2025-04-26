@@ -11,7 +11,7 @@
 </head>
 <body>
   <h1>Library collection</h1>
-  <dialog id="bookDialog">
+  <dialog id="libraryDialog">
     <form name="bookForm">
       <h2>Book information</h2>
       
@@ -44,13 +44,13 @@
       </div>
 
       <div class="dialogBtn">
-        <button class="secondaryBtn" id="cancelBtn" value="cancel">Cancel</button>
-        <button class="primaryBtn" id="confirmBtn" value="confirm">Confirm</button>
+        <button class="cancel secondaryBtn" value="cancel">Cancel</button>
+        <button class="confirm primaryBtn" value="confirm">Confirm</button>
       </div>
     </form>
   </dialog>
   
-  <button class="primaryBtn" id="showDialog">Add book</button>
+  <button id="showDialog" class="primaryBtn">Add book</button>
   <div class="container"></div>
 
   <script src="script.js"></script>
