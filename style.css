@@ -120,8 +120,8 @@ form input[type=checkbox] {
 }
 
 .dialog-btn {
-  float: right;
   display: flex;
+  justify-content: flex-end;
   gap: 8px;
   margin-top: 24px;
 }
