@@ -49,7 +49,7 @@ function createBookCard(book) {
   bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, divider, changeBtn, removeBtn);
 
   changeBtn.addEventListener("click", () => {
-    // Update both the display and the data model
+    // Update the DOM and myLibrary array
     const bookIndex = myLibrary.findIndex(b => b.id === book.id);
     if (bookIndex !== -1) {
       myLibrary[bookIndex].readStatus = myLibrary[bookIndex].readStatus === "Read" ? "Not read" : "Read";
@@ -58,7 +58,7 @@ function createBookCard(book) {
   });
 
   removeBtn.addEventListener("click", () => {
-    // Remove from both DOM and array
+    // Remove from the DOM and myLibrary array
     container.removeChild(bookDiv);
     const bookIndex = myLibrary.findIndex(b => b.id === book.id);
     if (bookIndex !== -1) {
@@ -121,6 +121,6 @@ confirmBtn.addEventListener("click", (event) => {
 });
 
 // Initialize with sample books
-addBookToLibrary("Quiet", " Susan Cain", 352, "Read");
+addBookToLibrary("Quiet", "Susan Cain", 352, "Read");
 addBookToLibrary("Crying in H Mart", "Michelle Zauner", 256, "Read");
 addBookToLibrary("The Midnight Library", "Matt Haig", 304, "Read");
