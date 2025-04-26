@@ -11,46 +11,46 @@
 </head>
 <body>
   <h1>Library collection</h1>
-  <dialog id="libraryDialog">
-    <form name="bookForm">
+  <dialog id="library-dialog">
+    <form name="book-form">
       <h2>Book information</h2>
       
-      <div class="errorDiv">
-        <span class="errorMsg"></span>
+      <div class="error-div">
+        <span class="error-msg"></span>
       </div>
 
       <div>
         <label for="title">Title*</label>
         <input type="text" id="title" name="title" required>
-        <span class="helpText">*Required</span>
+        <span class="help-text">*Required</span>
       </div>
 
       <div>
         <label for="author">Author*</label>
         <input type="text" id="author" name="author" required>
-        <span class="helpText">*Required</span>
+        <span class="help-text">*Required</span>
       </div>
 
       <div>
         <label for="pages">Pages*</label>
         <input type="number" id="pages" name="pages" required>
-        <span class="helpText">*Required</span>
+        <span class="help-text">*Required</span>
       </div>
       
       <div>
-        <input class="read" type="checkbox" id="read" name="readStatus" value="Read">
-        <input type="hidden" id="notRead" name="readStatus" value="Not read">
+        <input class="read" type="checkbox" id="read" name="read-status" value="Read">
+        <input type="hidden" id="not-read" name="read-status" value="Not read">
         <label for="read">I have read this book.</label>
       </div>
 
-      <div class="dialogBtn">
-        <button class="cancel secondaryBtn" value="cancel">Cancel</button>
-        <button class="confirm primaryBtn" value="confirm">Confirm</button>
+      <div class="dialog-btn">
+        <button class="cancel secondary-btn" value="cancel">Cancel</button>
+        <button class="confirm primary-btn" value="confirm">Confirm</button>
       </div>
     </form>
   </dialog>
   
-  <button id="showDialog" class="primaryBtn">Add book</button>
+  <button id="show-dialog" class="primary-btn">Add book</button>
   <div class="container"></div>
 
   <script src="script.js"></script>

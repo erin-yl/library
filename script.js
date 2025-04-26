@@ -1,7 +1,7 @@
 const container = document.querySelector(".container");
 const form = document.querySelector("form");
-const showDialog = document.querySelector("#showDialog");
-const libraryDialog = document.querySelector("#libraryDialog");
+const showDialog = document.querySelector("#show-dialog");
+const libraryDialog = document.querySelector("#library-dialog");
 const confirmBtn = libraryDialog.querySelector(".confirm");
 const cancelBtn = libraryDialog.querySelector(".cancel");
 const myLibrary = [];
@@ -38,8 +38,8 @@ function createBookCard(book) {
     <p>Pages: ${book.pages}</p>
     <p class="status">Status: ${book.readStatus}</p>
     <hr>
-    <button class="change secondaryBtn">Change read status</button>
-    <button class="remove secondaryBtn">Remove book</button>
+    <button class="change secondary-btn">Change read status</button>
+    <button class="remove secondary-btn">Remove book</button>
   `;
   
   const changeBtn = bookDiv.querySelector('.change');
@@ -69,8 +69,8 @@ function validateForm() {
   const title = form.elements.title.value.trim();
   const author = form.elements.author.value.trim();
   const pages = form.elements.pages.value;
-  const errorDiv = libraryDialog.querySelector(".errorDiv");
-  const errorMsg = libraryDialog.querySelector(".errorMsg");
+  const errorDiv = libraryDialog.querySelector(".error-div");
+  const errorMsg = libraryDialog.querySelector(".error-msg");
   
   if (!title || !author || !pages) {
     errorDiv.style.display = "inline-block";
@@ -94,7 +94,7 @@ showDialog.addEventListener("click", () => {
 });
 
 cancelBtn.addEventListener("click", (event) => {
-  const errorDiv = libraryDialog.querySelector(".errorDiv");
+  const errorDiv = libraryDialog.querySelector(".error-div");
 
   event.preventDefault();
   libraryDialog.close();
