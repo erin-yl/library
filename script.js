@@ -12,7 +12,7 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.readStatus = readStatus;
-    this.id = crypto.randomUUID(); // Creates a unique ID for each book
+    this.id = crypto.randomUUID(); // Create a unique ID for each book
   }
 
   toggleReadStatus() {
