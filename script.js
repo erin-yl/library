@@ -6,18 +6,20 @@ const confirmBtn = libraryDialog.querySelector(".confirm");
 const cancelBtn = libraryDialog.querySelector(".cancel");
 const myLibrary = [];
 
-function Book(title, author, pages, readStatus) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
-  this.id = crypto.randomUUID();
-}
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+    this.id = crypto.randomUUID(); // Creates a unique ID for each book
+  }
 
-Book.prototype.toggleReadStatus = function() {
-  this.readStatus = this.readStatus === "Read" ? "Not read" : "Read";
-  return this.readStatus;
-};
+  toggleReadStatus() {
+    this.readStatus = this.readStatus === "Read" ? "Not read" : "Read";
+    return this.readStatus;
+  }
+}
 
 function addBookToLibrary(title, author, pages, readStatus) {
   const newBook = new Book(title, author, pages, readStatus);
