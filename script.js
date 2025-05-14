@@ -43,7 +43,7 @@ function createBookCard(book) {
     <button class="change secondary-btn">Change read status</button>
     <button class="remove secondary-btn">Remove book</button>
   `;
-  
+
   const changeBtn = bookDiv.querySelector('.change');
   const removeBtn = bookDiv.querySelector('.remove');
 
@@ -63,7 +63,7 @@ function createBookCard(book) {
       myLibrary.splice(bookIndex, 1);
     }
   });
-  
+
   return bookDiv;
 }
 
@@ -73,7 +73,7 @@ function validateForm() {
   const pages = form.elements.pages.value;
   const errorDiv = libraryDialog.querySelector(".error-div");
   const errorMsg = libraryDialog.querySelector(".error-msg");
-  
+
   if (!title || !author || !pages) {
     errorDiv.style.display = "inline-block";
     errorMsg.textContent = "Please enter the book's title, author, and number of pages.";
@@ -85,7 +85,7 @@ function validateForm() {
     errorMsg.textContent = "Please enter a positive number for pages.";
     return false;
   }
-  
+
   errorDiv.style.display = "none";
   errorMsg.textContent = "";
   return true;
@@ -106,12 +106,12 @@ cancelBtn.addEventListener("click", (event) => {
 
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  
+
   if (validateForm()) {
     const formData = new FormData(form);
     const formValues = Object.fromEntries(formData);
     const readStatus = form.elements.read.checked ? "Read" : "Not read";
-    
+
     addBookToLibrary(formValues.title, formValues.author, formValues.pages, readStatus);
     libraryDialog.close();
     form.reset();
