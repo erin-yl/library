@@ -1,5 +1,5 @@
 # Library App
-A library system to manage your book collection.
+A library system to manage users' book collection.
 
 ## Features
 - Add books (title, author, pages)
